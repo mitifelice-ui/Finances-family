@@ -1,0 +1,49 @@
+═══════════════════════════════════════════════════
+   💰 FINANCES FAMILLE — APPLICATION MOBILE (PWA)
+═══════════════════════════════════════════════════
+
+COMMENT INSTALLER SUR VOTRE TÉLÉPHONE
+───────────────────────────────────────
+
+OPTION A — Via un serveur local (recommandé) :
+  1. Installez l'app "PWABuilder" ou "Netlify Drop"
+  2. Glissez ce dossier sur netlify.com/drop
+  3. Ouvrez le lien sur votre téléphone
+  4. "Ajouter à l'écran d'accueil"
+
+OPTION B — Hébergement gratuit en 2 minutes :
+  1. Allez sur https://netlify.com/drop
+  2. Glissez-déposez CE DOSSIER entier
+  3. Copiez le lien donné
+  4. Ouvrez ce lien sur votre iPhone/Android
+  5. iPhone : bouton Partager → "Sur l'écran d'accueil"
+     Android : menu Chrome → "Ajouter à l'écran d'accueil"
+
+OPTION C — GitHub Pages (gratuit, permanent) :
+  1. Créez un compte sur github.com
+  2. Nouveau dépôt public
+  3. Uploadez les fichiers
+  4. Settings → Pages → Branch main
+  5. Votre app est en ligne pour toujours !
+
+═══════════════════════════════════════════════════
+
+HOW TO INSTALL ON YOUR PHONE (English)
+───────────────────────────────────────
+
+Easiest way:
+  1. Go to https://netlify.com/drop
+  2. Drag and drop this ENTIRE FOLDER
+  3. Copy the link they give you
+  4. Open it on your iPhone or Android
+  5. iPhone: Share button → "Add to Home Screen"
+     Android: Chrome menu → "Add to Home Screen"
+
+═══════════════════════════════════════════════════
+FICHIERS INCLUS / FILES INCLUDED:
+  index.html     — Application principale
+  manifest.json  — Configuration PWA
+  sw.js          — Service worker (mode hors-ligne)
+  icons/         — Icônes de l'application
+  LISEZ-MOI.txt  — Ce fichier
+═══════════════════════════════════════════════════
