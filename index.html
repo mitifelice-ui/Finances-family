@@ -592,14 +592,30 @@ let lang="fr";
 // ══ I18N ══
 function T(k,...args){ const t=LANG[lang][k]; return typeof t==="function"?t(...args):(t||k); }
 function applyLang(){
-  document.querySelectorAll(".t[data-k]").forEach(el=>{
-    el.textContent=T(el.dataset.k);
-  });
-  document.getElementById("appTitle").textContent=T("appTitle");
-  document.getElementById("saveLabel").textContent=T("saveAuto");
-  document.getElementById("noteInput").placeholder=T("noteHint");
-  const btnFR=document.getElementById("btnFR"), btnEN=document.getElementById("btnEN");
-  btnFR.classList.toggle("active",lang==="fr"); btnEN.classList.toggle("active",lang==="en");
+  try {
+    document.querySelectorAll(".t[data-k]").forEach(el=>{
+      const val = T(el.dataset.k);
+      if(val && val !== el.dataset.k) el.textContent = val;
+    });
+    const appTitle = document.getElementById("appTitle");
+    if(appTitle) appTitle.textContent = T("appTitle");
+    const saveLabel = document.getElementById("saveLabel");
+    if(saveLabel) saveLabel.textContent = T("saveAuto");
+    const noteInput = document.getElementById("noteInput");
+    if(noteInput) noteInput.placeholder = T("noteHint");
+    const btnFR=document.getElementById("btnFR"), btnEN=document.getElementById("btnEN");
+    if(btnFR) btnFR.classList.toggle("active",lang==="fr");
+    if(btnEN) btnEN.classList.toggle("active",lang==="en");
+    // Update month selector
+    const mSel = document.getElementById("filterMois");
+    if(mSel) {
+      const cur = mSel.value;
+      const months = lang==="fr" ? ["Jan","Fév","Mar","Avr","Mai","Juin","Juil","Aoû","Sep","Oct","Nov","Déc"] : ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+      Array.from(mSel.options).forEach((o,i) => { o.textContent = months[i]; });
+      mSel.value = cur;
+    }
+    if(typeof updateInstallBanner === "function") updateInstallBanner();
+  } catch(e){ console.log("applyLang error:", e); }
 }
 function setLang(l){ lang=l; data.lang=l; save(); applyLang(); render(); }
 
@@ -660,6 +676,8 @@ function init(){
   addSplitPart();addSplitPart();
   applyLang();
   render();
+  // Force second pass to catch any missed elements
+  setTimeout(() => { applyLang(); }, 100);
 }
 
 // ══ RENDER ══
@@ -1201,15 +1219,13 @@ function dismissInstall(){
   const b = document.getElementById("installBanner");
   if(b) b.style.display = "none";
 }
-// Update install banner text based on lang
-const _origApplyLang = applyLang;
-function applyLang(){
-  _origApplyLang();
+// Update install banner text based on lang - simple version
+function updateInstallBanner(){
   const t = document.getElementById("installTitle");
   const s = document.getElementById("installSub");
+  const btn = document.getElementById("btnInstall");
   if(t) t.textContent = lang === "fr" ? "Installer l'application" : "Install the app";
   if(s) s.textContent = lang === "fr" ? "Accès rapide depuis votre écran d'accueil" : "Quick access from your home screen";
-  const btn = document.getElementById("btnInstall");
   if(btn) btn.textContent = lang === "fr" ? "Installer ✓" : "Install ✓";
 }
 
